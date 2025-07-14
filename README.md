@@ -20,6 +20,14 @@ docker build -t gerenciador-tarefas .
 docker run -d -p 7000:7000 -e BancoDados=<caminh-banco> gerenciador-tarefas
 ```
 
+## Auth
+Apesar de não haver autorização há uma identificação básica do usuário da API através do cabeçalho X-TokenUsuario que epsera o token do usuário cadastrado no banco de dados.
+Na inicialização do banco de dados serão criados dois:
+```
+Gerente - Token: GRT01
+Funcionário - Token: FUNC01
+```
+
 ## Roadmap
 
 ### Refinamento de negócio
