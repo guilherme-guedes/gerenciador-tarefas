@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GerenciadorTarefas.Infraestrutura.DAOs
 {
-    public class RelatorioDAO
+    public class RelatorioDAO : IRelatorioDAO
     {
         private readonly ILogger<RelatorioDAO> logger;
         private readonly ContextoBanco contexto;
@@ -19,12 +19,11 @@ namespace GerenciadorTarefas.Infraestrutura.DAOs
             this.contextoUsuario = contextoUsuario;
         }
 
-        public async Task<int> ConsultarMediaTarefasConcluidasUsuario()
+        public async Task<int> ConsultarMediaTarefasConcluidasUsuario(int idUsuario)
         {
-            var usuario = contextoUsuario.ObterUsuarioCorrente();
             var dtInicio = DateTime.Now.Date.AddDays(-30);
             var tarefasconcluidas = await contexto.Database.SqlQueryRaw<int>("SELECT COUNT(DISTINCT id_tarefa) FROM historico_modificacoes WHERE status = 2 AND autor_id = @usuarioId AND data_alteracao >= @dataInicio",
-                new SqliteParameter("@usuarioId", usuario.Id),
+                new SqliteParameter("@usuarioId", idUsuario),
                 new SqliteParameter("@dataInicio", dtInicio)
             ).ToListAsync();
 

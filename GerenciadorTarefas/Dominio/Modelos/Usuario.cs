@@ -10,5 +10,7 @@ namespace GerenciadorTarefas.Dominio.Modelos
         public List<Projeto> Projetos { get; set; }
         public virtual List<HistoricoModificacaoTarefa> HistoricoModificacoes { get; set; }
         public virtual List<Comentario> Comentarios { get; set; }
+
+        public bool Gerente() => this.Funcao == EFuncao.Gerente;
     }
 }

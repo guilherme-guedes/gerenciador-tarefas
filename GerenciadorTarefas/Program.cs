@@ -41,7 +41,7 @@ builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
 builder.Services.AddScoped<IRepositorioProjeto, RepositorioProjeto>();
 builder.Services.AddScoped<IRepositorioTarefa, RepositorioTarefa>();
 builder.Services.AddScoped<IRepositorioComentario, RepositorioComentario>();
-builder.Services.AddScoped<RelatorioDAO>();
+builder.Services.AddScoped<IRelatorioDAO, RelatorioDAO>();
 
 builder.Services.AddScoped<IServicoProjeto, ServicoProjeto>();
 builder.Services.AddScoped<IServicoTarefa, ServicoTarefa>();

@@ -4,16 +4,22 @@ namespace GerenciadorTarefas.Dominio.Servicos
 {
     public class ServicoRelatorio : IServicoRelatorio
     {
-        private readonly RelatorioDAO relatorioDAO;
+        private readonly IRelatorioDAO relatorioDAO;
+        private readonly IContextoUsuario contextoUsuario;
 
-        public ServicoRelatorio(RelatorioDAO relatorioDAO)
+        public ServicoRelatorio(IRelatorioDAO relatorioDAO, IContextoUsuario contextoUsuario)
         {
             this.relatorioDAO = relatorioDAO;
+            this.contextoUsuario = contextoUsuario;
         }
 
-        public async Task<int> ConsultarMediaTarefasConcluidasUsuarioUltimos30Dias()
+        public async Task<int> ConsultarMediaTarefasConcluidasUsuarioUltimos30Dias(int idUsuario)
         {
-            return await this.relatorioDAO.ConsultarMediaTarefasConcluidasUsuario();
+            var usuario = contextoUsuario.ObterUsuarioCorrente();
+            if(!usuario.Gerente())
+                throw new InvalidOperationException("Apenas gerentes podem acessar este relatório.");
+
+            return await this.relatorioDAO.ConsultarMediaTarefasConcluidasUsuario(idUsuario);
         }
     }
 }

@@ -2,6 +2,6 @@
 {
     public interface IServicoRelatorio
     {
-        public Task<int> ConsultarMediaTarefasConcluidasUsuarioUltimos30Dias();
+        public Task<int> ConsultarMediaTarefasConcluidasUsuarioUltimos30Dias(int idUsuario);
     }
 }

@@ -17,9 +17,9 @@ namespace GerenciadorTarefas.Controllers
         }
 
         [HttpGet("rendimento-usuario-ultimos-30dias")]
-        public async Task<ActionResult> ConsultarRendimentoUsuarioUltimos30Dias()
+        public async Task<ActionResult> ConsultarRendimentoUsuarioUltimos30Dias(int idUsuario)
         {
-            return Ok(await servicoRelatorio.ConsultarMediaTarefasConcluidasUsuarioUltimos30Dias());
+            return Ok(await servicoRelatorio.ConsultarMediaTarefasConcluidasUsuarioUltimos30Dias(idUsuario));
         }
     }
 }
